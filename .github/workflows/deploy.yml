@@ -7,41 +7,33 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      - name: Install MkDocs Material
-        run: pip install mkdocs-material
+      - name: Install dependencies
+        run: pip install mkdocs-material mike
 
-      - name: Build MkDocs site
-        run: mkdocs build
+      - name: Configure git credentials
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Deploy all versions
+        run: |
+          mike deploy --push 0.1.0
+          mike deploy --push 0.1.1
+          mike deploy --push --update-aliases 0.1.2 latest
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Set default version
+        run: mike set-default --push latest
