@@ -29,11 +29,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Deploy all versions
-        run: |
-          mike deploy --push 0.1.0
-          mike deploy --push 0.1.1
-          mike deploy --push --update-aliases 0.1.2 latest
+      - name: Deploy docs
+        run: mike deploy --push --update-aliases 0.1.2 latest
 
       - name: Set default version
         run: mike set-default --push latest
