@@ -15,7 +15,7 @@ In your `build.gradle.kts`:
 ```kotlin
 plugins {
     kotlin("jvm") version "2.0.0"
-    id("io.github.graphdsl.graphdsl-plugin") version "0.1.0"
+    id("io.github.graphdsl.graphdsl-plugin") version "0.1.4"
 }
 ```
 

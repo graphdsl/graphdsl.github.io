@@ -50,29 +50,18 @@ No strings. No reflection at runtime. Full IDE autocomplete.
 
 ## How to use it
 
-=== "Gradle Plugin (recommended)"
+```kotlin title="build.gradle.kts"
+plugins {
+    id("io.github.graphdsl.graphdsl-plugin") version "0.1.4"
+}
 
-    ```kotlin title="build.gradle.kts"
-    plugins {
-        id("io.github.graphdsl.graphdsl-plugin") version "0.1.0"
-    }
+graphDsl {
+    packageName.set("com.example.api.dsl")
+    schemaDir.set("src/main/graphql")
+}
+```
 
-    graphDsl {
-        packageName.set("com.example.api.dsl")
-        schemaDir.set("src/main/graphql")
-    }
-    ```
-
-    Run `./gradlew generateDsl` — generated sources land in `build/generated/graphdsl/`.
-
-=== "CLI"
-
-    ```bash
-    java -jar graphdsl-cli.jar \
-        --schema_files schema.graphqls \
-        --generated_directory build/generated/graphdsl \
-        --pkg_for_generated_classes com.example.api.dsl
-    ```
+Run `./gradlew generateDsl` — generated sources land in `build/generated/graphdsl/`.
 
 ---
 
@@ -83,11 +72,10 @@ No strings. No reflection at runtime. Full IDE autocomplete.
 | `schema` | GraphQL schema parsing |
 | `mapper` | Maps GraphQL types to Kotlin types |
 | `codegen` | DSL source file generation |
-| `cli` | Standalone CLI runner |
 | `gradle-plugins` | Gradle build integration |
 | `utils` | Shared utilities |
 
 ---
 
-[Get started :octicons-arrow-right-16:](getting-started.md){ .md-button .md-button--primary }
-[View on GitHub :octicons-mark-github-16:](https://github.com/graphdsl/graphql-kotlin-dsl){ .md-button }
+[Get started](getting-started.md){ .md-button .md-button--primary }
+[View on GitHub](https://github.com/graphdsl/graphql-kotlin-dsl){ .md-button }

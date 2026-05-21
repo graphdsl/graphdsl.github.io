@@ -6,7 +6,7 @@ Plugin ID: `io.github.graphdsl.graphdsl-plugin`
 
 ```kotlin title="build.gradle.kts"
 plugins {
-    id("io.github.graphdsl.graphdsl-plugin") version "0.1.0"
+    id("io.github.graphdsl.graphdsl-plugin") version "0.1.4"
 }
 ```
 
